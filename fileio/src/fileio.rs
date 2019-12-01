@@ -1,11 +1,13 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+mod fileio;
+
 fn main() {
     println!("Hello World");
 }
 
-fn get_single_number_input(path: &str) -> Vec<i32> {
+pub fn get_single_number_input(path: &str) -> Vec<i32> {
     let mut vec = Vec::new();
     let input = File::open(path).unwrap();
     let buffered = BufReader::new(input);
@@ -16,7 +18,7 @@ fn get_single_number_input(path: &str) -> Vec<i32> {
     vec
 }
 
-fn get_array_of_numbers_input(path: &str) -> Vec<Vec<i32>> {
+pub fn get_array_of_numbers_input(path: &str) -> Vec<Vec<i32>> {
     let mut vec: Vec<Vec<i32>> = Vec::new();
     let input = File::open(path).unwrap();
     let buffered = BufReader::new(input);

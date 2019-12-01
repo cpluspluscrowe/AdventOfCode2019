@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader, Error};
 use std::cmp;
+extern crate fileio;
 
 fn main() -> Result<(), Error> {
     let path = "src/puzzle_input.txt";
@@ -12,7 +13,7 @@ fn main() -> Result<(), Error> {
 }
 
 fn get_mass_summation(path: &str) -> i32 {
-    let lines = get_file_lines(path);
+    let lines = fileio::get_file_lines(path);
     let mut summation: i32 = 0;
     for line in lines {
         let line: i32 = line.unwrap().parse().unwrap();
@@ -22,7 +23,7 @@ fn get_mass_summation(path: &str) -> i32 {
 }
 
 fn get_resursive_mass_summation(path: &str) -> i32 {
-    let lines = get_file_lines(path);
+    let lines = get_single_number_input(path);
     let mut summation: i32 = 0;
     for line in lines {
         let line: i32 = line.unwrap().parse().unwrap();
