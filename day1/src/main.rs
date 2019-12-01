@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Error};
 
 fn main() -> Result<(), Error> {
-    let path = "src/example_input.txt";
+    let path = "src/puzzle_input.txt";
     let summation = get_mass_summation(path);
     println!("The summation = {}", summation);
     Ok(())
