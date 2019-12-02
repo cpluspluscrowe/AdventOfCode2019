@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+//use regex::Regex;
 
 pub fn get_single_number_input(path: &str) -> Vec<i32> {
     let mut vec = Vec::new();
@@ -37,6 +38,11 @@ pub fn get_input_lines(path: &str) -> Vec<String> {
     }
     vec
 }
+
+/*pub fn apply_regex_to_input(text: &str,regular_expression: &str) -> regex::re_unicode::Captures {
+    let re = Regex::new(regular_expression).unwrap();
+    re.captures(text).unwrap()
+}*/
 
 #[test]
 fn test_get_single_number_input() {
