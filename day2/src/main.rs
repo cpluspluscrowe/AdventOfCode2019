@@ -1,8 +1,10 @@
 use fileio::get_array_of_numbers_input;
 use std::io::Error;
 
+// Day1, part 1 answer: 5434663
+
 fn main() -> Result<(), Error> {
-    let path = "src/example_input.txt";
+    let path = "src/puzzle_input.txt";
     let input = get_data(path);
     let output = update_values(input, 0, 1, 2, 3);
     for value in output {
