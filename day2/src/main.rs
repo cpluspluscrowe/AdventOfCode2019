@@ -6,11 +6,12 @@ use std::io::Error;
 fn main() -> Result<(), Error> {
     let path = "src/puzzle_input.txt";
     let input = get_data(path);
-    let output = update_values(input, 0, 1, 2, 3);
+    guess_inputs(input);
+/*    let output = update_values(input, 0, 1, 2, 3);
     for value in output {
         println!("{}", value);
     }
-    println!("Hello World");
+    println!("Hello World");*/
     Ok(())
 }
 
@@ -18,6 +19,22 @@ pub fn get_data(path: &str) -> Vec<i32> {
     let lines = get_array_of_numbers_input(path);
     let input = lines[0].to_vec();
     input.to_vec()
+}
+
+// No provided tests and a single answer
+// so I print it out instead of returning anything
+pub fn guess_inputs(mut input: Vec<i32>) {
+    for value1 in 1..101 {
+        for value2 in 1..101 {
+            input[1] = value1;
+            input[2] = value2;
+            let output = update_values(input.to_vec(), 0, 1, 2, 3);
+            if output[0] == 19690720 {
+                let magic_number = value1*100 + value2;
+                println!("{}", magic_number);
+            }
+        }
+    }
 }
 
 pub fn update_values(
