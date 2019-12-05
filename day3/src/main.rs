@@ -35,8 +35,8 @@ pub fn get_direction_indexes(direction: &str) -> (i32, i32) {
     }
 }
 
-fn replace_direction_with_tuple(vectors: Vec<Vec<(i32, String)>>) -> Vec<Vec<(i32, (i32, i32))>> {
-    vectors.iter().map(|x| x.iter().map(|y| (y.0, get_direction_indexes(&y.1))).collect()).collect()
+fn replace_direction_with_tuple(vectors: Vec<Vec<(String, i32)>>) -> Vec<Vec<((i32, i32), i32)>> {
+    vectors.iter().map(|x| x.iter().map(|y| (get_direction_indexes(&y.0), y.1)).collect()).collect()
 }
 
 fn main() {
@@ -46,6 +46,7 @@ fn main() {
         .iter()
         .map(|x| operate_on_vector(x.to_vec()))
         .collect();
+    let direction_magnitudes = replace_direction_with_tuple(vectors.to_vec());
     // Determines maximum 2D array size
     let summation = get_magnitude_summation(vectors);
     let mut array = vec![vec![0; summation as usize]; summation as usize];
