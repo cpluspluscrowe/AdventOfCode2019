@@ -28,6 +28,18 @@ pub fn get_array_of_numbers_input(path: &str) -> Vec<Vec<i32>> {
     vec
 }
 
+pub fn get_array_of_string_input(path: &str) -> Vec<Vec<String>> {
+    let mut vec  = Vec::new();
+    let input = File::open(path).unwrap();
+    let buffered = BufReader::new(input);
+    for line in buffered.lines() {
+        let numbers: Vec<String> = line
+            .unwrap().split(",").map(|s| s.to_string()).collect();
+        vec.push(numbers);
+    }
+    vec
+}
+
 pub fn get_input_lines(path: &str) -> Vec<String> {
     let mut vec = Vec::new();
     let input = File::open(path).unwrap();
@@ -59,10 +71,10 @@ fn test_get_input_lines() {
 }
 
 #[test]
-fn test_get_array_of_numbers_input() {
-    let numbers = get_input_lines("src/input_lines.txt");
-    let v1 = "abc";
-    let v2 = "def";
+fn test_get_array_of_string_input() {
+    let numbers: Vec<Vec<String>> = get_array_of_string_input("src/array_string_input.txt");
+    let v1: Vec<String> = "U7,R6,D4,L4".split(",").map(String::from).collect();
+        let v2: Vec<String> = "U7,R6,D4,L4".split(",").map(String::from).collect();
     assert_eq!(numbers[0], v1);
     assert_eq!(numbers[1], v2);
 }
