@@ -39,6 +39,22 @@ fn replace_direction_with_tuple(vectors: Vec<Vec<(String, i32)>>) -> Vec<Vec<((i
     vectors.iter().map(|x| x.iter().map(|y| (get_direction_indexes(&y.0), y.1)).collect()).collect()
 }
 
+fn fill_array(direction_magnitudes: Vec<((i32, i32), i32)>, mut toFill: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    let vector_size = toFill.len();
+    let mut row_index = vector_size - 1;
+    let mut column_index = 0;
+    for vector in direction_magnitudes {
+        let (vertical_component, horizontal_component) = vector.0;
+        let magnitude = vector.1;
+        for interval in 0..magnitude {
+            row_index += vertical_component as usize;
+            column_index += horizontal_component as usize;
+            toFill[row_index as usize][column_index as usize] += 1
+        }
+    }
+     toFill
+}
+
 fn main() {
     let path = "src/input.txt";
     let input = get_array_of_string_input(path);
