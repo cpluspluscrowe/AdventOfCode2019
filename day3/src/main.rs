@@ -39,17 +39,19 @@ fn replace_direction_with_tuple(vectors: Vec<Vec<(String, i32)>>) -> Vec<Vec<((i
     vectors.iter().map(|x| x.iter().map(|y| (get_direction_indexes(&y.0), y.1)).collect()).collect()
 }
 
-fn fill_array(direction_magnitudes: Vec<((i32, i32), i32)>, mut toFill: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+fn fill_array(direction_magnitudes: Vec<Vec<((i32, i32), i32)>>, mut toFill: Vec<Vec<usize>>) -> Vec<Vec<usize>> {
     let vector_size = toFill.len();
-    let mut row_index = vector_size - 1;
-    let mut column_index = 0;
-    for vector in direction_magnitudes {
-        let (vertical_component, horizontal_component) = vector.0;
-        let magnitude = vector.1;
-        for interval in 0..magnitude {
-            row_index += vertical_component as usize;
-            column_index += horizontal_component as usize;
-            toFill[row_index as usize][column_index as usize] += 1
+    for path_vectors in direction_magnitudes {
+        let mut row_index = vector_size - 1;
+        let mut column_index = 0;
+        for vector in path_vectors {
+            let (vertical_component, horizontal_component) = vector.0;
+            let magnitude = vector.1;
+            for interval in 0..magnitude {
+                row_index = row_index + (vertical_component as usize);
+                column_index = column_index + (horizontal_component as usize);
+                toFill[row_index][column_index] += 1
+            }
         }
     }
      toFill
@@ -68,5 +70,6 @@ fn main() {
     let mut array = vec![vec![0; summation as usize]; summation as usize];
     //    let mut array_to_fill  = [[0, summation]; summation];
     //    println!("{}",summation);
+    let filled = fill_array(direction_magnitudes, array);
     println!("Hello, world!");
 }
